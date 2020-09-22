@@ -35,6 +35,35 @@ def print(students)
   end
 end
 
+#print the list of students whose name begins with a specific letter
+def print_with_letter(students)
+  #ask for a letter
+  puts "Enter a letter to filter students or hit return to finish"
+  letter = gets.chomp
+  student_number = 1
+  while !letter.empty? do
+    students.each_with_index do |student, index|
+      if student[:name][0] == letter
+        puts "#{student_number}. #{student[:name]} (#{student[:cohort]} cohort)"
+        student_number += 1
+      end
+    end
+    letter = gets.chomp
+  end
+end
+
+#print students whose names are < 12 chars long
+def print_shorter_than_12(students)
+  puts "Names shorter than 12 characters:"
+  student_number = 1
+  students.each_with_index do |student, index|
+    if student[:name].length < 12
+      puts "#{student_number}. #{student[:name]} (#{student[:cohort]} cohort)"
+      student_number += 1
+    end
+  end
+end
+
 #print the number of students
 def print_footer(students)
   if students.count == 1
@@ -48,4 +77,6 @@ end
 students = input_students
 print_header
 print(students)
+# print_with_letter(students)
+print_shorter_than_12(students)
 print_footer(students)
