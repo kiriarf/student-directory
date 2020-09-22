@@ -1,33 +1,33 @@
 #print the header
 def print_header
-  puts "The students of Villains Academy"
-  puts "-------------"
+  puts "The students of Villains Academy".center(50, "-")
+  puts "--------------------------------".center(50, "-")
 end
 
 #input student information manually
 def input_students
-  puts "Please enter the name of a student"
-  puts "To finish, just hit return twice"
+  puts "Please enter the name of a student".center(50, "-")
+  puts "To finish, just hit return twice".center(50, "-")
   # create an empty array
   students = []
   # get the name
   name = gets.chomp
-  puts "Enter their height"
+  puts "Enter their height in cm".center(50, "-")
   height = gets.chomp
   # while the name is not empty, repeat this code
   while !name.empty? do
     # add the student hash to the array
     students << {name: name, cohort: :november, height: height}
     if students.count == 1
-      puts "We have our first student!"
+      puts "We have our first student!".center(50, "-")
     else
-      puts "Now we have #{students.count} students"
+      puts "Now we have #{students.count} students".center(50, "-")
     end
     # get another name and heightfrom the user
-    puts "Enter another name or return to finish"
+    puts "Enter another name or return to finish".center(50, "-")
     name = gets.chomp
     if !name.empty?
-      puts "Enter their height"
+      puts "Enter their height in cm".center(50, "-")
       height = gets.chomp
     end
   end
@@ -68,16 +68,16 @@ end
 #print the list of students
 def print(students)
   students.each_with_index do |student, index|
-    puts "#{index + 1}. #{student[:name]}, height: #{student[:height]} (#{student[:cohort]} cohort)"
+    puts "#{index + 1}. #{student[:name]}, height: #{student[:height]}cm (#{student[:cohort]} cohort)"
   end
 end
 
 #print the number of students
 def print_footer(students)
   if students.count == 1
-    puts "We have one great student"
+    puts "We have one great student".center(50, "-")
   else
-    puts "Overall, we have #{students.count} great students"
+    puts "Overall, we have #{students.count} great students".center(50, "-")
   end
 end
 
