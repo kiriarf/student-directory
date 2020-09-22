@@ -1,3 +1,6 @@
+#require date class to get current month name in input_students method
+require 'date'
+
 #print the header
 def print_header
   puts "The students of Villains Academy".center(50, "-")
@@ -10,14 +13,22 @@ def input_students
   puts "To finish, just hit return twice".center(50, "-")
   # create an empty array
   students = []
+  #default cohort value is current month -> used when no value provided
+  default_cohort = Date.today.strftime("%B")
   # get the name
   name = gets.chomp
   puts "Enter their height in cm".center(50, "-")
   height = gets.chomp
+  puts "Enter cohort month or hit return for current month".center(50, "-")
+  cohort = gets.chomp
   # while the name is not empty, repeat this code
   while !name.empty? do
     # add the student hash to the array
-    students << {name: name, cohort: :november, height: height}
+    students << {
+      name: name,
+      cohort: !cohort.empty? ? cohort : default_cohort,
+      height: height
+    }
     if students.count == 1
       puts "We have our first student!".center(50, "-")
     else
@@ -29,6 +40,8 @@ def input_students
     if !name.empty?
       puts "Enter their height in cm".center(50, "-")
       height = gets.chomp
+      puts "Enter cohort month or hit return for current month".center(50, "-")
+      cohort = gets.chomp
     end
   end
   # return the array of students
