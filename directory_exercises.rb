@@ -6,23 +6,30 @@ end
 
 #input student information manually
 def input_students
-  puts "Please enter the names of the students"
+  puts "Please enter the name of a student"
   puts "To finish, just hit return twice"
   # create an empty array
   students = []
-  # get the first name
+  # get the name
   name = gets.chomp
+  puts "Enter their height"
+  height = gets.chomp
   # while the name is not empty, repeat this code
   while !name.empty? do
     # add the student hash to the array
-    students << {name: name, cohort: :november}
+    students << {name: name, cohort: :november, height: height}
     if students.count == 1
       puts "We have our first student!"
     else
       puts "Now we have #{students.count} students"
     end
-    # get another name from the user
+    # get another name and heightfrom the user
+    puts "Enter another name or return to finish"
     name = gets.chomp
+    if !name.empty?
+      puts "Enter their height"
+      height = gets.chomp
+    end
   end
   # return the array of students
   students
@@ -58,6 +65,13 @@ def print_shorter_than_12(students)
   end
 end
 
+#print the list of students
+def print(students)
+  students.each_with_index do |student, index|
+    puts "#{index + 1}. #{student[:name]}, height: #{student[:height]} (#{student[:cohort]} cohort)"
+  end
+end
+
 #print the number of students
 def print_footer(students)
   if students.count == 1
@@ -70,6 +84,7 @@ end
 #nothing happens until we call the methods
 students = input_students
 print_header
-print_with_letter(students)
-print_shorter_than_12(students)
+# print_with_letter(students)
+# print_shorter_than_12(students)
+print(students)
 print_footer(students)

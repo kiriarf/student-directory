@@ -10,7 +10,7 @@ def input_students
   puts "To finish, just hit return twice"
   # create an empty array
   students = []
-  # get the first name
+  # get the name
   name = gets.chomp
   # while the name is not empty, repeat this code
   while !name.empty? do
