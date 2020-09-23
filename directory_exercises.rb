@@ -10,24 +10,26 @@ end
 #input student information manually
 def input_students
   puts "Please enter the name of a student".center(50, "-")
-  puts "To finish, just hit return twice".center(50, "-")
+  puts "To finish, hit return".center(50, "-")
   # create an empty array
   students = []
   #default cohort value is current month -> used when no value provided
   default_cohort = Date.today.strftime("%B")
   # get the name
   name = gets.chomp
-  puts "Enter their height in cm".center(50, "-")
-  height = gets.chomp
-  puts "Enter cohort month or hit return for current month".center(50, "-")
-  cohort = gets.chomp
+  if !name.empty?
+    puts "Enter their height in cm".center(50, "-")
+    height = gets.chomp
+    puts "Enter cohort month or hit return for current month".center(50, "-")
+    cohort = gets.chomp
+  end
   # while the name is not empty, repeat this code
   while !name.empty? do
     # add the student hash to the array
     students << {
       name: name,
       cohort: !cohort.empty? ? cohort : default_cohort,
-      height: height
+      height: !height.empty? ? height + "cm" : "unknown"
     }
     if students.count == 1
       puts "We have our first student!".center(50, "-")
@@ -80,8 +82,10 @@ end
 
 #print the list of students
 def print(students)
-  students.each_with_index do |student, index|
-    puts "#{index + 1}. #{student[:name]}, height: #{student[:height]}cm (#{student[:cohort]} cohort)"
+  unless students.empty?
+    students.each_with_index do |student, index|
+      puts "#{index + 1}. #{student[:name]}, height: #{student[:height]}cm (#{student[:cohort]} cohort)"
+    end
   end
 end
 
@@ -101,7 +105,7 @@ def print_by_cohort(students)
     student_number = 1
     students.each do |student|
       if student.has_value?(cohort)
-        puts "#{student_number}. #{student[:name]}, height: #{student[:height]}cm"
+        puts "#{student_number}. #{student[:name]}, height: #{student[:height]}"
         student_number += 1
       end
     end
@@ -110,7 +114,9 @@ end
 
 #print the number of students
 def print_footer(students)
-  if students.count == 1
+  if students.count == 0
+    puts "We don't have any students ;("
+  elsif students.count == 1
     puts "We have one great student".center(50, "-")
   else
     puts "Overall, we have #{students.count} great students".center(50, "-")
@@ -119,7 +125,7 @@ end
 
 #nothing happens until we call the methods
 students = input_students
-print_header
+print_header if !students.empty?
 # print_with_letter(students)
 # print_shorter_than_12(students)
 print_by_cohort(students)
