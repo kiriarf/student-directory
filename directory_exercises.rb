@@ -85,6 +85,29 @@ def print(students)
   end
 end
 
+#print the students grouped by their cohort
+def print_by_cohort(students)
+  #create an empty cohorts array and populate it
+  cohorts = []
+  students.each do |student|
+    if !cohorts.include?(student[:cohort])
+      cohorts << student[:cohort]
+    end
+  end
+
+  #groups students by cohort and outputs their info
+  cohorts.each do |cohort|
+    puts "#{cohort} cohort:"
+    student_number = 1
+    students.each do |student|
+      if student.has_value?(cohort)
+        puts "#{student_number}. #{student[:name]}, height: #{student[:height]}cm"
+        student_number += 1
+      end
+    end
+  end
+end
+
 #print the number of students
 def print_footer(students)
   if students.count == 1
@@ -99,5 +122,6 @@ students = input_students
 print_header
 # print_with_letter(students)
 # print_shorter_than_12(students)
-print(students)
+print_by_cohort(students)
+# print(students)
 print_footer(students)
