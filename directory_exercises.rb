@@ -123,11 +123,44 @@ def print_footer(students)
   end
 end
 
+def interactive_menu
+  students = []
+  loop do
+    #puts the menu options for user to choose
+    puts "Options".center(50, "-")
+    puts "1. Input the students"
+    puts "2. Show the students"
+    puts "9. Exit"
+    puts " "
+    #saves user input into a variable
+    puts "Enter your selection:"
+    selection = gets.chomp
+    puts " "
+    #actions based on selection
+    case selection
+      when "1"
+        students = input_students
+      when "2"
+        print_header if !students.empty?
+        print_by_cohort(students)
+        puts " "
+        print_footer(students)
+        puts " "
+      when "9"
+        exit
+      else
+        puts "Wrong selection, try again"
+    end
+  end
+end
+
+interactive_menu
+
 #nothing happens until we call the methods
-students = input_students
-print_header if !students.empty?
+# students = input_students
+# print_header if !students.empty?
 # print_with_letter(students)
 # print_shorter_than_12(students)
-print_by_cohort(students)
+# print_by_cohort(students)
 # print(students)
-print_footer(students)
+# print_footer(students)
