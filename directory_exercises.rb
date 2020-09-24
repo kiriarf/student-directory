@@ -156,6 +156,9 @@ end
 def save_students
   #open file for writing
   file = File.open("students.csv", "w")
+  #add header row
+  header_row = "Name, Height, Cohort"
+  file.puts header_row
   #iterate over @students
   @students.each do |student|
     student_data = [student[:name], student[:height], student[:cohort]]
