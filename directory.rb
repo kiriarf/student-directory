@@ -50,27 +50,73 @@ def process(selection)
   end
 end
 
+# #input student information manually
+# def input_students
+#   puts "Please enter the name of a student".center(50, "-")
+#   puts "To finish, hit return".center(50, "-")
+#   #default cohort value is current month -> used when no value provided
+#   default_cohort = Date.today.strftime("%B")
+#   # get the name
+#   name = STDIN.gets.chomp
+#   if !name.empty?
+#     puts "Enter their height in cm".center(50, "-")
+#     height = STDIN.gets.chomp
+#     puts "Enter cohort month or hit return for current month".center(50, "-")
+#     cohort = STDIN.gets.chomp
+#   end
+#   # while the name is not empty, repeat this code
+#   while !name.empty? do
+#     # add the student hash to the array
+#     @students << {
+#       name: name,
+#       cohort: !cohort.empty? ? cohort.downcase.capitalize : default_cohort,
+#       height: !height.empty? ? height + "cm" : "unknown"
+#     }
+#     if @students.count == 1
+#       puts "We have our first student!".center(50, "-")
+#     else
+#       puts "Now we have #{@students.count} students".center(50, "-")
+#     end
+#     # get another name and heightfrom the user
+#     puts "Enter another name or return to finish".center(50, "-")
+#     name = STDIN.gets.chomp
+#     if !name.empty?
+#       puts "Enter their height in cm".center(50, "-")
+#       height = STDIN.gets.chomp
+#       puts "Enter cohort month or hit return for current month".center(50, "-")
+#       cohort = STDIN.gets.chomp
+#     end
+#   end
+# end
+
 #input student information manually
 def input_students
   puts "Please enter the name of a student".center(50, "-")
   puts "To finish, hit return".center(50, "-")
-  #default cohort value is current month -> used when no value provided
-  default_cohort = Date.today.strftime("%B")
-  # get the name
-  name = STDIN.gets.chomp
-  if !name.empty?
+  user_input
+  populate_array
+end
+
+#in this method user is prompted for input and result saved in instance vars
+def user_input
+  @name = STDIN.gets.chomp
+  if !@name.empty?
     puts "Enter their height in cm".center(50, "-")
-    height = STDIN.gets.chomp
+    @height = STDIN.gets.chomp
     puts "Enter cohort month or hit return for current month".center(50, "-")
-    cohort = STDIN.gets.chomp
+    @cohort = STDIN.gets.chomp
   end
-  # while the name is not empty, repeat this code
-  while !name.empty? do
+end
+
+#user input is inserted into @students array until user finishes
+def populate_array
+  default_cohort = Date.today.strftime("%B")
+  while !@name.empty? do
     # add the student hash to the array
     @students << {
-      name: name,
-      cohort: !cohort.empty? ? cohort.downcase.capitalize : default_cohort,
-      height: !height.empty? ? height + "cm" : "unknown"
+      name: @name,
+      cohort: !@cohort.empty? ? @cohort.downcase.capitalize : default_cohort,
+      height: !@height.empty? ? @height + "cm" : "unknown"
     }
     if @students.count == 1
       puts "We have our first student!".center(50, "-")
@@ -79,13 +125,7 @@ def input_students
     end
     # get another name and heightfrom the user
     puts "Enter another name or return to finish".center(50, "-")
-    name = STDIN.gets.chomp
-    if !name.empty?
-      puts "Enter their height in cm".center(50, "-")
-      height = STDIN.gets.chomp
-      puts "Enter cohort month or hit return for current month".center(50, "-")
-      cohort = STDIN.gets.chomp
-    end
+    user_input
   end
 end
 
@@ -132,28 +172,6 @@ def show_by_cohort
   print_footer(@students)
   puts " "
 end
-
-#print the students grouped by their cohort
-# def print_by_cohort(arr)
-#   #create an empty cohorts array and populate it
-#   cohorts = []
-#   arr.each do |student|
-#     if !cohorts.include?(student[:cohort])
-#       cohorts << student[:cohort]
-#     end
-#   end
-#   #groups students by cohort and outputs their info
-#   cohorts.each do |cohort|
-#     puts "#{cohort} cohort:"
-#     student_number = 1
-#     arr.each do |student|
-#       if student.has_value?(cohort)
-#         puts "#{student_number}. #{student[:name]}, height: #{student[:height]}"
-#         student_number += 1
-#       end
-#     end
-#   end
-# end
 
 #print the students grouped by their cohort
 def print_by_cohort(arr)
