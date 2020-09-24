@@ -18,12 +18,12 @@ def input_students
   #default cohort value is current month -> used when no value provided
   default_cohort = Date.today.strftime("%B")
   # get the name
-  name = gets.chomp
+  name = STDIN.gets.chomp
   if !name.empty?
     puts "Enter their height in cm".center(50, "-")
-    height = gets.chomp
+    height = STDIN.gets.chomp
     puts "Enter cohort month or hit return for current month".center(50, "-")
-    cohort = gets.chomp
+    cohort = STDIN.gets.chomp
   end
   # while the name is not empty, repeat this code
   while !name.empty? do
@@ -40,12 +40,12 @@ def input_students
     end
     # get another name and heightfrom the user
     puts "Enter another name or return to finish".center(50, "-")
-    name = gets.chomp
+    name = STDIN.gets.chomp
     if !name.empty?
       puts "Enter their height in cm".center(50, "-")
-      height = gets.chomp
+      height = STDIN.gets.chomp
       puts "Enter cohort month or hit return for current month".center(50, "-")
-      cohort = gets.chomp
+      cohort = STDIN.gets.chomp
     end
   end
 end
@@ -54,7 +54,7 @@ end
 def print_with_letter(arr)
   #ask for a letter
   puts "Enter a letter to filter students or hit return to finish"
-  letter = gets.chomp
+  letter = STDIN.gets.chomp
   student_number = 1
   puts "Names starting with #{letter}:"
   while !letter.empty? do
@@ -64,7 +64,7 @@ def print_with_letter(arr)
         student_number += 1
       end
     end
-    letter = gets.chomp
+    letter = STDIN.gets.chomp
   end
 end
 
@@ -171,8 +171,8 @@ def save_students
 end
 
 #load the list from students.csv
-def load_students
-  file = File.open("students.csv", "r")
+def load_students(filename = "students.csv")
+  file = File.open(filename, "r")
   file.readlines.each_with_index do |line, index|
     if index > 0
       name, height, cohort = line.chomp.split(',')
@@ -180,6 +180,19 @@ def load_students
     end
   end
   file.close
+end
+
+#if user provides filename argument in cmd line, will try to load list
+def try_load_students
+  filename = ARGV.first # first argument from the command line
+  return if filename.nil? # get out of the method if it isn't given
+  if File.exists?(filename)
+    load_students(filename)
+     puts "Loaded #{@students.count} students from #{filename}"
+  else # if it doesn't exist
+    puts "Sorry, #{filename} doesn't exist."
+    exit # quit the program
+  end
 end
 
 
@@ -209,13 +222,14 @@ end
 def interactive_menu
   loop do
     print_menu
-    process(gets.chomp)
+    process(STDIN.gets.chomp)
   end
 end
 
 
 
 #nothing happens until we call the methods
+try_load_students
 interactive_menu
 # students = input_students
 # print_header if !students.empty?
