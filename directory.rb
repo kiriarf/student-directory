@@ -134,20 +134,49 @@ def show_by_cohort
 end
 
 #print the students grouped by their cohort
+# def print_by_cohort(arr)
+#   #create an empty cohorts array and populate it
+#   cohorts = []
+#   arr.each do |student|
+#     if !cohorts.include?(student[:cohort])
+#       cohorts << student[:cohort]
+#     end
+#   end
+#   #groups students by cohort and outputs their info
+#   cohorts.each do |cohort|
+#     puts "#{cohort} cohort:"
+#     student_number = 1
+#     arr.each do |student|
+#       if student.has_value?(cohort)
+#         puts "#{student_number}. #{student[:name]}, height: #{student[:height]}"
+#         student_number += 1
+#       end
+#     end
+#   end
+# end
+
+#print the students grouped by their cohort
 def print_by_cohort(arr)
-  #create an empty cohorts array and populate it
-  cohorts = []
-  arr.each do |student|
-    if !cohorts.include?(student[:cohort])
-      cohorts << student[:cohort]
+  populate_cohorts(@students)
+  group_by_cohort(@cohorts, @students)
+end
+
+#create an empty cohorts array and populate it
+def populate_cohorts(students_arr)
+  @cohorts = []
+  students_arr.each do |student|
+    if !@cohorts.include?(student[:cohort])
+      @cohorts << student[:cohort]
     end
   end
+end
 
-  #groups students by cohort and outputs their info
-  cohorts.each do |cohort|
+#groups students by cohort and outputs their info
+def group_by_cohort(cohorts_arr, students_arr)
+  cohorts_arr.each do |cohort|
     puts "#{cohort} cohort:"
     student_number = 1
-    arr.each do |student|
+    students_arr.each do |student|
       if student.has_value?(cohort)
         puts "#{student_number}. #{student[:name]}, height: #{student[:height]}"
         student_number += 1
@@ -189,7 +218,7 @@ def try_load_students
   ARGV.include?(ARGV.first) ? filename = ARGV.first : filename = "students.csv"
   if File.exists?(filename)
     load_students(filename)
-     puts "Loaded #{@students.count} students from #{filename}"
+    puts "Loaded #{@students.count} students from #{filename}"
   else # if it doesn't exist
     puts "Sorry, #{filename} doesn't exist."
   end
