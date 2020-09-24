@@ -1,5 +1,6 @@
 #require date class to get current month name in input_students method
 require 'date'
+require 'CSV'
 
 #create an empty array as an instance variable
 @students = []
@@ -129,6 +130,7 @@ def print_menu
   puts "2. Show the students"
   puts "3. Show the students by cohort"
   puts "4. Save the list to students.csv"
+  puts "5. Load the list from students.csv"
   puts "9. Exit"
   puts " "
   puts "Enter your selection:"
@@ -168,6 +170,19 @@ def save_students
   file.close
 end
 
+#load the list from students.csv
+def load_students
+  file = File.open("students.csv", "r")
+  file.readlines.each_with_index do |line, index|
+    if index > 0
+      name, height, cohort = line.chomp.split(',')
+        @students << {name: name, height: height, cohort: cohort}
+    end
+  end
+  file.close
+end
+
+
 #Actions based on user selection
 def process(selection)
   puts " "
@@ -181,6 +196,9 @@ def process(selection)
     when "4"
       save_students
       puts "File saved!"
+    when "5"
+      load_students
+      puts "File loaded!"
     when "9"
       exit
     else
