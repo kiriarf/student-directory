@@ -1,5 +1,6 @@
 #require date class to get current month name in input_students method
 require 'date'
+#require to work with .csv files
 require 'CSV'
 
 #create an empty array as an instance variable
@@ -185,14 +186,12 @@ end
 
 #if user provides filename argument in cmd line, will try to load list
 def try_load_students
-  filename = ARGV.first # first argument from the command line
-  return if filename.nil? # get out of the method if it isn't given
+  ARGV.include?(ARGV.first) ? filename = ARGV.first : filename = "students.csv"
   if File.exists?(filename)
     load_students(filename)
      puts "Loaded #{@students.count} students from #{filename}"
   else # if it doesn't exist
     puts "Sorry, #{filename} doesn't exist."
-    exit # quit the program
   end
 end
 
