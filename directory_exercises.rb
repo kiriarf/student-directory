@@ -122,6 +122,14 @@ def print_footer(arr)
   end
 end
 
+def show_students
+  print_header if !@students.empty?
+  print_by_cohort(@students)
+  puts " "
+  print_footer(@students)
+  puts " "
+end
+
 def interactive_menu
   loop do
     #puts the menu options for user to choose
@@ -139,11 +147,7 @@ def interactive_menu
       when "1"
         input_students
       when "2"
-        print_header if !@students.empty?
-        print_by_cohort(@students)
-        puts " "
-        print_footer(@students)
-        puts " "
+        show_students
       when "9"
         exit
       else
@@ -152,16 +156,8 @@ def interactive_menu
   end
 end
 
-interactive_menu
-# input_students -> works ok
-# print_with_letter(@students) -> works ok
-# print_shorter_than_12(@students) -> works ok
-# print(@students) -> works ok
-# print_by_cohort(@students) -> works ok
-# print_header -> works ok
-# print_footer(@students) -> works ok
-
 #nothing happens until we call the methods
+interactive_menu
 # students = input_students
 # print_header if !students.empty?
 # print_with_letter(students)
