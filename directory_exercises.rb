@@ -80,7 +80,7 @@ def print_shorter_than_12(arr)
 end
 
 #print the list of students
-def print(arr)
+def print_students(arr)
   unless arr.empty?
     arr.each_with_index do |student, index|
       puts "#{index + 1}. #{student[:name]}, height: #{student[:height]} (#{student[:cohort]} cohort)"
@@ -111,7 +111,7 @@ def print_by_cohort(arr)
   end
 end
 
-#print the number of students
+#print the number of students as a footer
 def print_footer(arr)
   if arr.count == 0
     puts "We don't have any students ;("
@@ -122,6 +122,17 @@ def print_footer(arr)
   end
 end
 
+#Prints the menu of the application
+def print_menu
+  puts "Options".center(50, "-")
+  puts "1. Input the students"
+  puts "2. Show the students"
+  puts "9. Exit"
+  puts " "
+  puts "Enter your selection:"
+end
+
+#Prints the header, student list and footer
 def show_students
   print_header if !@students.empty?
   print_by_cohort(@students)
@@ -130,29 +141,25 @@ def show_students
   puts " "
 end
 
+#Actions based on user selection
+def process(selection)
+  puts " "
+  case selection
+    when "1"
+      input_students
+    when "2"
+      show_students
+    when "9"
+      exit
+    else
+      puts "Wrong selection, try again"
+  end
+end
+
 def interactive_menu
   loop do
-    #puts the menu options for user to choose
-    puts "Options".center(50, "-")
-    puts "1. Input the students"
-    puts "2. Show the students"
-    puts "9. Exit"
-    puts " "
-    #saves user input into a variable
-    puts "Enter your selection:"
-    selection = gets.chomp
-    puts " "
-    #actions based on selection
-    case selection
-      when "1"
-        input_students
-      when "2"
-        show_students
-      when "9"
-        exit
-      else
-        puts "Wrong selection, try again"
-    end
+    print_menu
+    process(gets.chomp)
   end
 end
 
