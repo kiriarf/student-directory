@@ -1,6 +1,9 @@
 #require date class to get current month name in input_students method
 require 'date'
 
+#create an empty array as an instance variable
+@students = []
+
 #print the header
 def print_header
   puts "The students of Villains Academy".center(50, "-")
@@ -11,8 +14,6 @@ end
 def input_students
   puts "Please enter the name of a student".center(50, "-")
   puts "To finish, hit return".center(50, "-")
-  # create an empty array
-  students = []
   #default cohort value is current month -> used when no value provided
   default_cohort = Date.today.strftime("%B")
   # get the name
@@ -26,15 +27,15 @@ def input_students
   # while the name is not empty, repeat this code
   while !name.empty? do
     # add the student hash to the array
-    students << {
+    @students << {
       name: name,
       cohort: !cohort.empty? ? cohort : default_cohort,
       height: !height.empty? ? height + "cm" : "unknown"
     }
-    if students.count == 1
+    if @students.count == 1
       puts "We have our first student!".center(50, "-")
     else
-      puts "Now we have #{students.count} students".center(50, "-")
+      puts "Now we have #{@students.count} students".center(50, "-")
     end
     # get another name and heightfrom the user
     puts "Enter another name or return to finish".center(50, "-")
@@ -46,19 +47,17 @@ def input_students
       cohort = gets.chomp
     end
   end
-  # return the array of students
-  students
 end
 
 #print the list of students whose name begins with a specific letter
-def print_with_letter(students)
+def print_with_letter(arr)
   #ask for a letter
   puts "Enter a letter to filter students or hit return to finish"
   letter = gets.chomp
   student_number = 1
   puts "Names starting with #{letter}:"
   while !letter.empty? do
-    students.each_with_index do |student, index|
+    arr.each_with_index do |student, index|
       if student[:name][0] == letter
         puts "#{student_number}. #{student[:name]} (#{student[:cohort]} cohort)"
         student_number += 1
@@ -69,10 +68,10 @@ def print_with_letter(students)
 end
 
 #print students whose names are < 12 chars long
-def print_shorter_than_12(students)
+def print_shorter_than_12(arr)
   puts "Names shorter than 12 characters:"
   student_number = 1
-  students.each_with_index do |student, index|
+  arr.each_with_index do |student, index|
     if student[:name].length < 12
       puts "#{student_number}. #{student[:name]} (#{student[:cohort]} cohort)"
       student_number += 1
@@ -81,19 +80,19 @@ def print_shorter_than_12(students)
 end
 
 #print the list of students
-def print(students)
-  unless students.empty?
-    students.each_with_index do |student, index|
-      puts "#{index + 1}. #{student[:name]}, height: #{student[:height]}cm (#{student[:cohort]} cohort)"
+def print(arr)
+  unless arr.empty?
+    arr.each_with_index do |student, index|
+      puts "#{index + 1}. #{student[:name]}, height: #{student[:height]} (#{student[:cohort]} cohort)"
     end
   end
 end
 
 #print the students grouped by their cohort
-def print_by_cohort(students)
+def print_by_cohort(arr)
   #create an empty cohorts array and populate it
   cohorts = []
-  students.each do |student|
+  arr.each do |student|
     if !cohorts.include?(student[:cohort])
       cohorts << student[:cohort]
     end
@@ -103,7 +102,7 @@ def print_by_cohort(students)
   cohorts.each do |cohort|
     puts "#{cohort} cohort:"
     student_number = 1
-    students.each do |student|
+    arr.each do |student|
       if student.has_value?(cohort)
         puts "#{student_number}. #{student[:name]}, height: #{student[:height]}"
         student_number += 1
@@ -113,13 +112,13 @@ def print_by_cohort(students)
 end
 
 #print the number of students
-def print_footer(students)
-  if students.count == 0
+def print_footer(arr)
+  if arr.count == 0
     puts "We don't have any students ;("
-  elsif students.count == 1
+  elsif arr.count == 1
     puts "We have one great student".center(50, "-")
   else
-    puts "Overall, we have #{students.count} great students".center(50, "-")
+    puts "Overall, we have #{arr.count} great students".center(50, "-")
   end
 end
 
@@ -154,7 +153,14 @@ def interactive_menu
   end
 end
 
-interactive_menu
+# interactive_menu
+input_students
+# print_with_letter(@students) -> works ok
+# print_shorter_than_12(@students) -> works ok
+# print(@students) -> works ok
+# print_by_cohort(@students) -> works ok
+print_header
+print_footer(@students)
 
 #nothing happens until we call the methods
 # students = input_students
