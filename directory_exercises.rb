@@ -29,7 +29,7 @@ def input_students
     # add the student hash to the array
     @students << {
       name: name,
-      cohort: !cohort.empty? ? cohort : default_cohort,
+      cohort: !cohort.empty? ? cohort.downcase.capitalize : default_cohort,
       height: !height.empty? ? height + "cm" : "unknown"
     }
     if @students.count == 1
