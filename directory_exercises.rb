@@ -127,6 +127,7 @@ def print_menu
   puts "Options".center(50, "-")
   puts "1. Input the students"
   puts "2. Show the students"
+  puts "3. Show the students by cohort"
   puts "9. Exit"
   puts " "
   puts "Enter your selection:"
@@ -134,6 +135,15 @@ end
 
 #Prints the header, student list and footer
 def show_students
+  print_header if !@students.empty?
+  print_students(@students)
+  puts " "
+  print_footer(@students)
+  puts " "
+end
+
+#Same as above but by cohort
+def show_by_cohort
   print_header if !@students.empty?
   print_by_cohort(@students)
   puts " "
@@ -149,6 +159,8 @@ def process(selection)
       input_students
     when "2"
       show_students
+    when "3"
+      show_by_cohort
     when "9"
       exit
     else
