@@ -189,9 +189,21 @@ def load_students(filename = "students.csv")
 end
 
 #if user provides filename argument in cmd line, will try to load list
+# def try_load_students
+#   puts "Enter filename with the student list or hit return for students.csv"
+#   ARGV.include?(ARGV.first) ? filename = ARGV.first : filename = "students.csv"
+#   if File.exists?(filename)
+#     load_students(filename)
+#     puts "Loaded #{@students.count} students from #{filename}"
+#   else # if it doesn't exist
+#     puts "Sorry, #{filename} doesn't exist."
+#   end
+# end
+
 def try_load_students
   puts "Enter filename with the student list or hit return for students.csv"
-  ARGV.include?(ARGV.first) ? filename = ARGV.first : filename = "students.csv"
+  filename = gets.chomp
+  filename = "students.csv" if filename.empty?
   if File.exists?(filename)
     load_students(filename)
     puts "Loaded #{@students.count} students from #{filename}"
