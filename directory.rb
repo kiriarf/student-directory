@@ -166,18 +166,16 @@ end
 
 #Saves the list of students to students.csv
 def save_students
-  #open file for writing
-  file = File.open("students.csv", "w")
-  #add header row
   header_row = "Name, Height, Cohort"
-  file.puts header_row
-  #iterate over @students
-  @students.each do |student|
-    student_data = [student[:name], student[:height], student[:cohort]]
-    csv_line = student_data.join(",")
-    file.puts csv_line
-  end
-  file.close
+  #open file for writing
+  file = File.open("students.csv", "w") {
+    |f| f.write header_row
+    @students.each do |student|
+      student_data = [student[:name], student[:height], student[:cohort]]
+      csv_line = student_data.join(",")
+      f.write csv_line
+    end
+  }
 end
 
 #load the list from students.csv
@@ -194,6 +192,7 @@ end
 
 #if user provides filename argument in cmd line, will try to load list
 def try_load_students
+  puts "Enter filename with the student list or hit return for students.csv"
   ARGV.include?(ARGV.first) ? filename = ARGV.first : filename = "students.csv"
   if File.exists?(filename)
     load_students(filename)
