@@ -45,7 +45,6 @@ def process(selection)
       filename = gets.chomp
       filename = @filename if filename.empty?
       load_students(filename)
-      puts "File loaded!"
     when "9"
       exit
     else
@@ -187,9 +186,12 @@ end
 def load_students(filename)
   data = CSV.read(filename)
   data.shift
+  no_of_students = 0
   data.each do |row|
     @students << {name: row[0], height: row[1], cohort: row[2]}
+    no_of_students += 1
   end
+  puts "Loaded #{no_of_students} students from #{filename}"
 end
 
 #if user provides filename argument in cmd line, will try to load list
@@ -200,7 +202,6 @@ def try_load_students
   @filename = "students.csv" if @filename.empty?
   if File.exists?(@filename)
     load_students(@filename)
-    puts "Loaded #{@students.count} students from #{@filename}"
   else # if it doesn't exist
     puts "Sorry, #{@filename} doesn't exist."
   end
