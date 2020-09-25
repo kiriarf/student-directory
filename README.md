@@ -2,7 +2,7 @@
 
 The student directory script allows you to manage the list of students enrolled at Villains Academy.
 
-## How to use ##
+## How to Use ##
 
 Navigate to the directory and run the directory.rb file using ruby:
 ```shell
@@ -14,3 +14,27 @@ The program will let you know what file is executed, greet you and prompt to ent
 <p align="left">
   <img src="./images/greeting.png" alt="Size Limit CLI" width="400">
 </p>
+
+Once the filename has been provided, the user is either shown how many students were loaded from the file or that the file doesn't exist.
+
+<p align="left">
+  <img src="./images/students_loaded.png" alt="Size Limit CLI" width="400">
+</p>
+
+### Main Menu ###
+
+The main menu has 6 options and user is prompted to enter their selection:
+
+<p align="left">
+  <img src="./images/menu.png" alt="Size Limit CLI" width="400">
+</p>
+
+The options are:
+
+1. Input the students:
+
+<p align="left">
+  <img src="./images/1.png" alt="Size Limit CLI" width="400">
+</p>
+
+User needs to enter a name of a new student. If that happens, the student's height and cohort will also need to be entered. To finish, press return on the name entry.
