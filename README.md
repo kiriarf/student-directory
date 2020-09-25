@@ -31,7 +31,7 @@ The main menu has 6 options and user is prompted to enter their selection:
 
 The options are:
 
-1. Input the students:
+1. **Input the students:**
 
 <p align="center">
   <img src="./images/1.png" width="400">
@@ -39,7 +39,7 @@ The options are:
 
 User needs to enter a name of a new student. If that happens, the student's height and cohort will also need to be entered. User is then notified how many students are now in Villains Academy. To finish, press return on the name entry.
 
-2. Show the students:
+2. **Show the students:**
 
 <p align="center">
   <img src="./images/2.png" width="400">
@@ -47,7 +47,7 @@ User needs to enter a name of a new student. If that happens, the student's heig
 
 Shows the students' info in the order they were entered.
 
-3. Show the students by cohort:
+3. **Show the students by cohort:**
 
 <p align="center">
   <img src="./images/3.png" width="400">
@@ -55,7 +55,7 @@ Shows the students' info in the order they were entered.
 
 Groups the students into their respective cohorts and outputs them.
 
-4. Save the list to a file:
+4. **Save the list to a file:**
 
 <p align="center">
   <img src="./images/4.png" width="400">
@@ -63,10 +63,14 @@ Groups the students into their respective cohorts and outputs them.
 
 Prompts user to enter the filename where to save the list to or hit return to stay on the file loaded on startup. This method will overwrite a file!
 
-5. Load the list from a file
+5. **Load the list from a file:**
 
 <p align="center">
   <img src="./images/5.png" width="400">
 </p>
 
 Prompts user to enter filename of the student list (or return for students.csv) and shows the number of students loaded from that file. If a student already exists in the list, that student will not be loaded.
+
+9. **Exit**
+
+Entering 9 will terminate the application.
