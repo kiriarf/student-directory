@@ -18,7 +18,7 @@ The program will let you know what file is executed, greet you and prompt to ent
 Once the filename has been provided, the user is either shown how many students were loaded from the file or that the file doesn't exist.
 
 <p align="left">
-  <img src="./images/students_loaded.png" width="400">
+  <img src="./images/students_loaded.png" width="200">
 </p>
 
 ### Main Menu ###
@@ -26,7 +26,7 @@ Once the filename has been provided, the user is either shown how many students 
 The main menu has 6 options and user is prompted to enter their selection:
 
 <p align="left">
-  <img src="./images/menu.png" width="400">
+  <img src="./images/Menu.png" width="400">
 </p>
 
 The options are:
