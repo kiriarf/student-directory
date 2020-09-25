@@ -11,6 +11,6 @@ ruby directory.rb
 
 The program will let you know what file is executed, greet you and prompt to enter a filename with your list of students. Pressing return will default to students.csv.
 
-<p align="center">
-  <img src="./images/greeting.png" alt="Size Limit CLI" width="738">
+<p align="left">
+  <img src="./images/greeting.png" alt="Size Limit CLI" width="400">
 </p>
