@@ -20,8 +20,8 @@ def print_menu
   puts "1. Input the students"
   puts "2. Show the students"
   puts "3. Show the students by cohort"
-  puts "4. Save the list to students.csv"
-  puts "5. Load the list from students.csv"
+  puts "4. Save the list to a file"
+  puts "5. Load the list from a file"
   puts "9. Exit"
   puts " "
   puts "Enter your selection:"
@@ -166,9 +166,11 @@ end
 
 #Saves the list of students to students.csv
 def save_students
+  puts "Enter new filename or hit return for current file (#{@filename})"
+  filename = gets.chomp
+  filename = @filename if filename.empty?
   header_row = "Name, Height, Cohort"
-  #open file for writing
-  file = File.open("students.csv", "w") {
+  file = File.open(filename, "w") {
     |f| f.puts header_row
     @students.each do |student|
       student_data = [student[:name], student[:height], student[:cohort]]
@@ -179,11 +181,10 @@ def save_students
 end
 
 #Loads students from students.csv by default
-def load_students(filename = "students.csv")
+def load_students(filename)
   data = CSV.read(filename)
   data.shift
   data.each do |row|
-    # name, height, cohort = row.split(',')
     @students << {name: row[0], height: row[1], cohort: row[2]}
   end
 end
@@ -192,13 +193,13 @@ end
 def try_load_students
   puts "Welcome to Villains Academy!".center(50, "-")
   puts "Enter filename with the student list or hit return for students.csv"
-  filename = gets.chomp
-  filename = "students.csv" if filename.empty?
-  if File.exists?(filename)
-    load_students(filename)
-    puts "Loaded #{@students.count} students from #{filename}"
+  @filename = gets.chomp
+  @filename = "students.csv" if @filename.empty?
+  if File.exists?(@filename)
+    load_students(@filename)
+    puts "Loaded #{@students.count} students from #{@filename}"
   else # if it doesn't exist
-    puts "Sorry, #{filename} doesn't exist."
+    puts "Sorry, #{@filename} doesn't exist."
   end
 end
 
