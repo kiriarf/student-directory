@@ -37,4 +37,4 @@ The options are:
   <img src="./images/1.png" width="400">
 </p>
 
-User needs to enter a name of a new student. If that happens, the student's height and cohort will also need to be entered. To finish, press return on the name entry.
+User needs to enter a name of a new student. If that happens, the student's height and cohort will also need to be entered. User is then notified how many students are now in Villains Academy. To finish, press return on the name entry.
