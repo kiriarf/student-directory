@@ -188,8 +188,10 @@ def load_students(filename)
   data.shift
   no_of_students = 0
   data.each do |row|
-    @students << {name: row[0], height: row[1], cohort: row[2]}
-    no_of_students += 1
+    if !@students.include?({name: row[0], height: row[1], cohort: row[2]})
+      @students << {name: row[0], height: row[1], cohort: row[2]}
+      no_of_students += 1
+    end
   end
   puts "Loaded #{no_of_students} students from #{filename}"
 end
