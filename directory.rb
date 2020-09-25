@@ -169,25 +169,23 @@ def save_students
   header_row = "Name, Height, Cohort"
   #open file for writing
   file = File.open("students.csv", "w") {
-    |f| f.write header_row
+    |f| f.puts header_row
     @students.each do |student|
       student_data = [student[:name], student[:height], student[:cohort]]
       csv_line = student_data.join(",")
-      f.write csv_line
+      f.puts csv_line
     end
   }
 end
 
-#load the list from students.csv
+#Loads students from students.csv by default
 def load_students(filename = "students.csv")
-  file = File.open(filename, "r")
-  file.readlines.each_with_index do |line, index|
-    if index > 0
-      name, height, cohort = line.chomp.split(',')
-        @students << {name: name, height: height, cohort: cohort}
-    end
+  data = CSV.read(filename)
+  data.shift
+  data.each do |row|
+    # name, height, cohort = row.split(',')
+    @students << {name: row[0], height: row[1], cohort: row[2]}
   end
-  file.close
 end
 
 #if user provides filename argument in cmd line, will try to load list
