@@ -41,7 +41,10 @@ def process(selection)
       save_students
       puts "File saved!"
     when "5"
-      load_students
+      puts "Enter new filename or hit return for current file (#{@filename})"
+      filename = gets.chomp
+      filename = @filename if filename.empty?
+      load_students(filename)
       puts "File loaded!"
     when "9"
       exit
