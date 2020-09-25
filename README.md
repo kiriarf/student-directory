@@ -12,13 +12,13 @@ ruby directory.rb
 The program will let you know what file is executed, greet you and prompt to enter a filename with your list of students. Pressing return will default to students.csv.
 
 <p align="left">
-  <img src="./images/greeting.png" alt="Size Limit CLI" width="400">
+  <img src="./images/greeting.png" width="400">
 </p>
 
 Once the filename has been provided, the user is either shown how many students were loaded from the file or that the file doesn't exist.
 
 <p align="left">
-  <img src="./images/students_loaded.png" alt="Size Limit CLI" width="400">
+  <img src="./images/students_loaded.png" width="400">
 </p>
 
 ### Main Menu ###
@@ -26,7 +26,7 @@ Once the filename has been provided, the user is either shown how many students 
 The main menu has 6 options and user is prompted to enter their selection:
 
 <p align="left">
-  <img src="./images/menu.png" alt="Size Limit CLI" width="400">
+  <img src="./images/menu.png" width="400">
 </p>
 
 The options are:
@@ -34,7 +34,7 @@ The options are:
 1. Input the students:
 
 <p align="left">
-  <img src="./images/1.png" alt="Size Limit CLI" width="400">
+  <img src="./images/1.png" width="400">
 </p>
 
 User needs to enter a name of a new student. If that happens, the student's height and cohort will also need to be entered. To finish, press return on the name entry.
